@@ -21,7 +21,7 @@ bool bisection(std::function<double(double)> f, double a, double b, double *root
         }
     }       
         
-    return root;
+    return false;
 }
 
 bool regula_falsi(std::function<double(double)> f,
