@@ -20,17 +20,17 @@ bool bisection(std::function<double(double)> f,
     }
 
     // n: number of iterations
-    int n = static_cast<int>(std::ceil(log2((b - a) / 1e-6)));
+    int n = static_cast<int>(std::ceil(log2((b - a) / 1e-6))); // Rounded up to int
 
     double temp;
 
     for (int i = 0; i < n; i++) {
         temp = (a + b) / 2.0;
 
-        if (f(temp) > 0) {
-            b = temp;
+        if (f(temp) > 0) { // temp located to the right of the zero
+            b = temp; // adjust upper bound
         } else {
-            a = temp;
+            a = temp; // adjust lower bound
         }
     }
 
@@ -53,9 +53,9 @@ bool regula_falsi(std::function<double(double)> f,
     while (error > 1e-6) {
         c = a - (f(a) * (b - a)) / (f(b) - f(a));
 
-        if (f(a) * f(c) <= 0) {
+        if (f(a) * f(c) <= 0) { // Different sign
             b = c;
-        } else {
+        } else { // Same sign
             a = c;
         }
         
@@ -76,7 +76,7 @@ bool newton_raphson(std::function<double(double)> f,
     double x1 = 1; // n
     double x2 = 2; // n+1
                         
-    while (std::abs(f(x2) - f(x1)) > 1e-6) {
+    while (std::abs(f(x2) - f(x1)) > 1e-6) { // Error > 1e-6
         double temp = x2;
 
         x2 = x1 - f(x1) / g(x1);
@@ -106,7 +106,7 @@ bool secant(std::function<double(double)> f,
         x2 = temp3; 
     }
     
-    // If the error is <= 1e-6, then x1 = x2 approximately
+    // If the error is <= 1e-6, then x_n = x_(n+1) approximately
     *root = x2;
 
     return true;
