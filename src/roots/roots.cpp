@@ -5,10 +5,11 @@
 // cmake -S . -B build
 // cmake --build build --config Debug
 // .\build\roots_demo.exe
+// ctest --test-dir build -C Debug
 
 // TA: ctest -test-dir build -C debug
 
-// Weird tool
+// 
 // $env:CMAKE_TLS_VERIFY=0; cmake -S . -B build
 
 bool bisection(std::function<double(double)> f,
@@ -34,6 +35,7 @@ bool bisection(std::function<double(double)> f,
         }
     }
 
+    // I used a combination of AI and TA's to understand pointer basics
     *root = temp;
 
     return true;
@@ -79,7 +81,7 @@ bool newton_raphson(std::function<double(double)> f,
         double temp = x2;
 
         x2 = x1 - f(x1) / g(x1);
-        x1 = temp; // updating value
+        x1 = temp; // update n
     }
     
     // If the error is <= 1e-6, then x1 = x2 approximately
