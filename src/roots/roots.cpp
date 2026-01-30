@@ -6,10 +6,10 @@
 // cmake --build build --config Debug
 // .\build\roots_demo.exe
 
+// TA: ctest -test-dir build -C debug
 
 // Weird tool
 // $env:CMAKE_TLS_VERIFY=0; cmake -S . -B build
-
 
 bool bisection(std::function<double(double)> f,
                double a, double b,
@@ -27,7 +27,7 @@ bool bisection(std::function<double(double)> f,
     for (int i = 0; i < n; i++) {
         temp = (a + b) / 2.0;
 
-        if (f(temp) > 0) { // temp located to the right of the zero
+        if (f(temp) > 0) { // value of temp less than root
             b = temp; // adjust upper bound
         } else {
             a = temp; // adjust lower bound
@@ -63,7 +63,6 @@ bool regula_falsi(std::function<double(double)> f,
     }
 
     *root = c;
-    
     
     return true;
 }
